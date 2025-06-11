@@ -5,6 +5,13 @@ import torch
 
 st.title("Perbandingan Model Deteksi Kanker Kulit")
 
+# Identitas pembuat
+st.markdown("""
+**Aplikasi ini dibuat oleh:**  
+👨‍💻 Muhammad Firda Satria  
+📚 Mahasiswa Informatika, Universitas Negeri Semarang  
+""")
+
 uploaded_file = st.file_uploader("Unggah gambar lesi kulit", type=["jpg", "jpeg", "png"])
 if uploaded_file:
     image = Image.open(uploaded_file)
@@ -35,3 +42,10 @@ if uploaded_file:
                 st.write(f"Akurasi Prediksi: **{confidence:.2%}**")
             else:
                 st.write("⚠️ Akurasi yang dihasilkan dibawah 50%, silahkan menggunakan gambar yang sesuai")
+
+# Credit
+st.markdown("""
+---
+🧠 Model berbasis Hugging Face Transformers  
+📦 Powered by [🤗 Hugging Face](https://huggingface.co) dan [Streamlit](https://streamlit.io)  
+""")
