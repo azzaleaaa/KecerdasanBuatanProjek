@@ -50,4 +50,6 @@ st.markdown("""
 🧠 Credit  
 📦 [Model Vision Transformer By Anwarkh1](https://huggingface.co/Anwarkh1/Skin_Cancer-Image_Classification) 
 📦 [Model ConvNext By Pranavkpba2000](https://huggingface.co/Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch)  
+🤖 Chat Assistant: ChatGPT by OpenAI
+🤖 Chat Assistant: Gemini by Google
 """)
