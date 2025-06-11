@@ -4,13 +4,14 @@ from transformers import AutoImageProcessor, AutoModelForImageClassification
 import torch
 
 # Judul aplikasi
-st.title("Perbandingan Model Deteksi Kanker Kulit")
+st.title("Perbandingan Model Vision Transformer dan ConvNext Dalam Deteksi Kanker Kulit")
 
 # Identitas pembuat
 st.markdown("""
 **Aplikasi ini dibuat oleh:**  
-👨‍💻 Muhammad Firda Satria  
-📚 Mahasiswa Informatika, Universitas Negeri Semarang  
+**Nama:** Muhammad Firda Satria  
+**NIM:** 2304130057  
+**Prodi:** Teknik Informatika, Universitas Negeri Semarang 
 """)
 
 # Upload gambar
@@ -51,6 +52,13 @@ if uploaded_file:
 # Credit
 st.markdown("""
 ---
-🧠 Model berbasis Hugging Face Transformers  
-📦 Powered by [🤗 Hugging Face](https://huggingface.co) dan [Streamlit](https://streamlit.io)  
+### 🧠 Credit
+
+**📦 Model:**
+- [Vision Transformer by Anwarkh1](https://huggingface.co/Anwarkh1/Skin_Cancer-Image_Classification)  
+- [ConvNext by Pranavkpba2000](https://huggingface.co/Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch)
+
+**🤖 Chat Assistant:**
+- ChatGPT by OpenAI  
+- Gemini by Google
 """)
