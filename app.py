@@ -1,6 +1,6 @@
 import streamlit as st
 from PIL import Image
-from transformers import AutoImageProcessor, AutoModelForImageClassification
+from transformers import AutoImageProcessor, AutoModelForImageClassification, AutoConfig
 import torch
 
 st.title("Perbandingan Model Deteksi Kanker Kulit")
@@ -13,31 +13,35 @@ st.markdown("""
 **Prodi:** Teknik Informatika, Universitas Negeri Semarang 
 """)
 
+# Upload gambar
 uploaded_file = st.file_uploader("Unggah gambar lesi kulit", type=["jpg", "jpeg", "png"])
 if uploaded_file:
     image = Image.open(uploaded_file)
     st.image(image, caption="Gambar yang diunggah", use_column_width=True)
 
-    # Define model paths and local config paths
+    # Daftar model dan path lokal konfigurasinya
     models = {
         "Vision Transformer": {
             "model_path": "Anwarkh1/Skin_Cancer-Image_Classification",
-            "local_config_path": "Model_Configs/Model Vit"
+            "local_config_path": "Model_Configs/Model Vit/"
         },
         "ConvNext": {
             "model_path": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch",
-            "local_config_path": "Model_Configs/Model ConvNext"
+            "local_config_path": "Model_Configs/Model ConvNext/"
         }
     }
 
     for model_name, model_info in models.items():
         st.subheader(f"Model: {model_name}")
         with st.spinner(f"Memproses dengan {model_name}..."):
-            # Load processor and model using local config files
+            # Load processor dan config dari lokal
             processor = AutoImageProcessor.from_pretrained(model_info["local_config_path"])
+            config = AutoConfig.from_pretrained(model_info["local_config_path"])
+
+            # Load model dari HuggingFace, tapi pakai config lokal
             model = AutoModelForImageClassification.from_pretrained(
                 model_info["model_path"],
-                config=model_info["local_config_path"] + "config.json"
+                config=config
             )
 
             inputs = processor(images=image, return_tensors="pt")
@@ -47,7 +51,7 @@ if uploaded_file:
                 probs = torch.nn.functional.softmax(outputs.logits, dim=1)
 
             pred_idx = torch.argmax(probs).item()
-            pred_class = model.config.id2label[pred_idx]
+            pred_class = model.config.id2label[str(pred_idx)]
             confidence = probs[0][pred_idx].item()
 
             if confidence >= 0.5:
