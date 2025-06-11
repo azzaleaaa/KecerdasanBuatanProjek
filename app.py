@@ -12,8 +12,8 @@ if uploaded_file:
 
     # Ubah path model sesuai dengan direktori model yang telah diunduh
     models = {
-        "Vision Transformer": "D:/Kuliah Abangkuh/Semester 4/Kecerdasan Buatan/Projek/model/model1",
-        "ConvNext": "D:/Kuliah Abangkuh/Semester 4/Kecerdasan Buatan/Projek/model/model2"
+        "Vision Transformer": "Anwarkh1/Skin_Cancer-Image_Classification",
+        "ConvNext": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch"
     }
 
     for model_name, model_path in models.items():
@@ -35,4 +35,4 @@ if uploaded_file:
                 st.write(f"Prediksi: **{pred_class}**")
                 st.write(f"Akurasi Prediksi: **{confidence:.2%}**")
             else:
-                st.write("⚠️ Model tidak cukup yakin untuk melakukan prediksi (akurasi < 50%).")
+                st.write("⚠️ Akurasi yang dihasilkan dibawah 50%, silahkan menggunakan gambar yang sesuai")
