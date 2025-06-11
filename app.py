@@ -22,11 +22,11 @@ if uploaded_file:
     models = {
         "Vision Transformer": {
             "model_path": "Anwarkh1/Skin_Cancer-Image_Classification",
-            "local_config_path": "./Model_Configs/Model Vit/"
+            "local_config_path": "Model_Configs/Model Vit"
         },
         "ConvNext": {
             "model_path": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch",
-            "local_config_path": "./Model_Configs/Model ConvNext/"
+            "local_config_path": "Model_Configs/Model ConvNext"
         }
     }
 
