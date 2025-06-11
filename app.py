@@ -8,9 +8,9 @@ st.title("Perbandingan Model Deteksi Kanker Kulit")
 # Identitas pembuat
 st.markdown("""
 **Aplikasi ini dibuat oleh:**  
-Nama : Muhammad Firda Satria  
-NIM : 2304130057
-Prodi : Teknik Informatika, Universitas Negeri Semarang  
+**Nama:** Muhammad Firda Satria  
+**NIM:** 2304130057  
+**Prodi:** Teknik Informatika, Universitas Negeri Semarang 
 """)
 
 uploaded_file = st.file_uploader("Unggah gambar lesi kulit", type=["jpg", "jpeg", "png"])
@@ -47,9 +47,13 @@ if uploaded_file:
 # Credit
 st.markdown("""
 ---
-🧠 Credit  
-📦 [Model Vision Transformer By Anwarkh1](https://huggingface.co/Anwarkh1/Skin_Cancer-Image_Classification) 
-📦 [Model ConvNext By Pranavkpba2000](https://huggingface.co/Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch)  
-🤖 Chat Assistant: ChatGPT by OpenAI
-🤖 Chat Assistant: Gemini by Google
+### 🧠 Credit
+
+**📦 Model:**
+- [Vision Transformer by Anwarkh1](https://huggingface.co/Anwarkh1/Skin_Cancer-Image_Classification)  
+- [ConvNext by Pranavkpba2000](https://huggingface.co/Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch)
+
+**🤖 Chat Assistant:**
+- ChatGPT by OpenAI  
+- Gemini by Google
 """)
