@@ -51,7 +51,7 @@ if uploaded_file:
                 probs = torch.nn.functional.softmax(outputs.logits, dim=1)
 
             pred_idx = torch.argmax(probs).item()
-            pred_class = model.config.id2label[str(pred_idx)]
+            pred_class = model.config.id2label[pred_idx]
             confidence = probs[0][pred_idx].item()
 
             if confidence >= 0.5:
