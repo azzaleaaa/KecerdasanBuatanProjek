@@ -18,16 +18,28 @@ if uploaded_file:
     image = Image.open(uploaded_file)
     st.image(image, caption="Gambar yang diunggah", use_column_width=True)
 
+    # Define model paths and local config paths
     models = {
-        "Vision Transformer": "Anwarkh1/Skin_Cancer-Image_Classification",
-        "ConvNext": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch"
+        "Vision Transformer": {
+            "model_path": "Anwarkh1/Skin_Cancer-Image_Classification",
+            "local_config_path": "./model_configs/vision_transformer/"
+        },
+        "ConvNext": {
+            "model_path": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch",
+            "local_config_path": "./model_configs/convnext/"
+        }
     }
 
-    for model_name, model_path in models.items():
+    for model_name, model_info in models.items():
         st.subheader(f"Model: {model_name}")
         with st.spinner(f"Memproses dengan {model_name}..."):
-            processor = AutoImageProcessor.from_pretrained(model_path)
-            model = AutoModelForImageClassification.from_pretrained(model_path)
+            # Load processor and model using local config files
+            processor = AutoImageProcessor.from_pretrained(model_info["local_config_path"])
+            model = AutoModelForImageClassification.from_pretrained(
+                model_info["model_path"],
+                config=model_info["local_config_path"] + "config.json"
+            )
+
             inputs = processor(images=image, return_tensors="pt")
 
             with torch.no_grad():
@@ -50,10 +62,10 @@ st.markdown("""
 ### 🧠 Credit
 
 **📦 Model:**
-- [Vision Transformer by Anwarkh1](https://huggingface.co/Anwarkh1/Skin_Cancer-Image_Classification)  
+- [Vision Transformer by Anwarkh1](https://huggingface.co/Anwarkh1/Skin_Cancer-Image_Classification)
 - [ConvNext by Pranavkpba2000](https://huggingface.co/Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch)
 
 **🤖 Chat Assistant:**
-- ChatGPT by OpenAI  
+- ChatGPT by OpenAI
 - Gemini by Google
 """)
