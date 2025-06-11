@@ -3,31 +3,35 @@ from PIL import Image
 from transformers import AutoImageProcessor, AutoModelForImageClassification
 import torch
 
+# Judul aplikasi
 st.title("Perbandingan Model Deteksi Kanker Kulit")
 
 # Identitas pembuat
 st.markdown("""
 **Aplikasi ini dibuat oleh:**  
-**Nama:** Muhammad Firda Satria  
-**NIM:** 2304130057  
-**Prodi:** Teknik Informatika, Universitas Negeri Semarang 
+👨‍💻 Muhammad Firda Satria  
+📚 Mahasiswa Informatika, Universitas Negeri Semarang  
 """)
 
+# Upload gambar
 uploaded_file = st.file_uploader("Unggah gambar lesi kulit", type=["jpg", "jpeg", "png"])
+
 if uploaded_file:
-    image = Image.open(uploaded_file)
+    image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="Gambar yang diunggah", use_column_width=True)
 
+    # Nama model dari Hugging Face
     models = {
         "Vision Transformer": "Anwarkh1/Skin_Cancer-Image_Classification",
-        "ConvNext": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch"
+        "ConvNeXT": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch" 
     }
 
-    for model_name, model_path in models.items():
+    for model_name, hf_model_id in models.items():
         st.subheader(f"Model: {model_name}")
         with st.spinner(f"Memproses dengan {model_name}..."):
-            processor = AutoImageProcessor.from_pretrained(model_path)
-            model = AutoModelForImageClassification.from_pretrained(model_path)
+            processor = AutoImageProcessor.from_pretrained(hf_model_id)
+            model = AutoModelForImageClassification.from_pretrained(hf_model_id)
+
             inputs = processor(images=image, return_tensors="pt")
 
             with torch.no_grad():
@@ -42,18 +46,11 @@ if uploaded_file:
                 st.write(f"Prediksi: **{pred_class}**")
                 st.write(f"Akurasi Prediksi: **{confidence:.2%}**")
             else:
-                st.write("⚠️ Akurasi yang dihasilkan dibawah 50%, silahkan menggunakan gambar yang sesuai")
+                st.write("⚠️ Model tidak cukup yakin untuk melakukan prediksi (akurasi < 50%).")
 
 # Credit
 st.markdown("""
 ---
-### 🧠 Credit
-
-**📦 Model:**
-- [Vision Transformer by Anwarkh1](https://huggingface.co/Anwarkh1/Skin_Cancer-Image_Classification)  
-- [ConvNext by Pranavkpba2000](https://huggingface.co/Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch)
-
-**🤖 Chat Assistant:**
-- ChatGPT by OpenAI  
-- Gemini by Google
+🧠 Model berbasis Hugging Face Transformers  
+📦 Powered by [🤗 Hugging Face](https://huggingface.co) dan [Streamlit](https://streamlit.io)  
 """)
