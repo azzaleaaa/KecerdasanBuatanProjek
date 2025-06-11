@@ -3,8 +3,7 @@ from PIL import Image
 from transformers import AutoImageProcessor, AutoModelForImageClassification
 import torch
 
-# Judul aplikasi
-st.title("Perbandingan Model Vision Transformer dan ConvNext Dalam Deteksi Kanker Kulit")
+st.title("Perbandingan Model Deteksi Kanker Kulit")
 
 # Identitas pembuat
 st.markdown("""
@@ -14,25 +13,21 @@ st.markdown("""
 **Prodi:** Teknik Informatika, Universitas Negeri Semarang 
 """)
 
-# Upload gambar
 uploaded_file = st.file_uploader("Unggah gambar lesi kulit", type=["jpg", "jpeg", "png"])
-
 if uploaded_file:
-    image = Image.open(uploaded_file).convert("RGB")
+    image = Image.open(uploaded_file)
     st.image(image, caption="Gambar yang diunggah", use_column_width=True)
 
-    # Nama model dari Hugging Face
     models = {
         "Vision Transformer": "Anwarkh1/Skin_Cancer-Image_Classification",
-        "ConvNeXT": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch" 
+        "ConvNext": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch"
     }
 
-    for model_name, hf_model_id in models.items():
+    for model_name, model_path in models.items():
         st.subheader(f"Model: {model_name}")
         with st.spinner(f"Memproses dengan {model_name}..."):
-            processor = AutoImageProcessor.from_pretrained(hf_model_id)
-            model = AutoModelForImageClassification.from_pretrained(hf_model_id)
-
+            processor = AutoImageProcessor.from_pretrained(model_path)
+            model = AutoModelForImageClassification.from_pretrained(model_path)
             inputs = processor(images=image, return_tensors="pt")
 
             with torch.no_grad():
@@ -47,7 +42,7 @@ if uploaded_file:
                 st.write(f"Prediksi: **{pred_class}**")
                 st.write(f"Akurasi Prediksi: **{confidence:.2%}**")
             else:
-                st.write("⚠️ Model tidak cukup yakin untuk melakukan prediksi (akurasi < 50%).")
+                st.write("⚠️ Akurasi yang dihasilkan dibawah 50%, silahkan menggunakan gambar yang sesuai")
 
 # Credit
 st.markdown("""
