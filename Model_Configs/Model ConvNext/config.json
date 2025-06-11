@@ -29,14 +29,14 @@
   "image_size": 224,
   "initializer_range": 0.02,
   "label2id": {
-    "AK": 0,
-    "BCC": 1,
-    "BKL": 2,
-    "DF": 3,
-    "MEL": 4,
-    "NV": 5,
-    "SCC": 6,
-    "VASC": 7
+    "Actinic Keratoses": 0,
+    "Basal Cell Carcinoma": 1,
+    "Benign Keratosis Like Lesions": 2,
+    "Dermatofibroma": 3,
+    "Melanoma": 4,
+    "Melanocytic Nevi": 5,
+    "Squamous Cell Carcinoma": 6,
+    "Vascular Lesions": 7
   },
   "layer_norm_eps": 1e-12,
   "layer_scale_init_value": 1e-06,
