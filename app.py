@@ -10,7 +10,6 @@ if uploaded_file:
     image = Image.open(uploaded_file)
     st.image(image, caption="Gambar yang diunggah", use_column_width=True)
 
-    # Ubah path model sesuai dengan direktori model yang telah diunduh
     models = {
         "Vision Transformer": "Anwarkh1/Skin_Cancer-Image_Classification",
         "ConvNext": "Pranavkpba2000/convnext-fine-tuned-complete-skin-cancer-50epoch"
